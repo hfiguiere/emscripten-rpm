@@ -1,6 +1,6 @@
 Name: emscripten
 Version: 1.37.2
-Release: 3%{?dist}
+Release: 3.1%{?dist}
 Summary: The emscripten compiler.
 
 License: NCSA
@@ -19,6 +19,7 @@ Requires: nodejs
 Requires: gcc-c++
 Requires: java-1.8.0-openjdk
 Requires(posttrans): %{_sbindir}/alternatives
+AutoReq: no
 
 %description
 Emscripten is the C/C++ to JavaScript compiler. This package is the
@@ -60,6 +61,9 @@ cp -va third_party -t %{buildroot}%{_datadir}/emscripten/
 %{_datadir}/emscripten/*
 
 %changelog
+* Thu Feb  2 2017 Hubert Figuiere <hub@figuiere.net> - 1.37.2-3
+- Added AutoReq: no because of some stray .py files.
+
 * Thu Feb  2 2017 Hubert Figuiere <hub@figuiere.net> - 1.37.2-3
 - Added third_party to the distribution.
 - Added java as a dependency for clojure.
