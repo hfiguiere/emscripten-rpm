@@ -1,8 +1,8 @@
 # We need to install it all in its own prefix.
-#%define _prefix /usr/lib/emscripten
+%define _prefix /usr/lib/emscripten
 Name: emscripten-fastcomp
 Version: 1.37.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: The clang+llvm backend for Emscripten
 
 License: NCSA
@@ -17,8 +17,6 @@ BuildRequires:  cmake
 BuildRequires:  zlib-devel
 BuildRequires:  libffi-devel
 BuildRequires:  ncurses-devel
-#BuildRequires:  python3-sphinx
-#BuildRequires:  libstdc++-static
 BuildRequires:  libxml2-devel
 
 
@@ -84,7 +82,6 @@ rm -vf %{buildroot}%{_datadir}/clang/clang-format-diff.py*
 %{_libdir}/BugpointPasses.so
 %{_libdir}/LLVMHello.so
 %{_libdir}/libLTO.so
-%{_libdir}/clang/
 %{_libdir}/*.so.*
 
 %files devel
@@ -93,10 +90,14 @@ rm -vf %{buildroot}%{_datadir}/clang/clang-format-diff.py*
 %{_libdir}/cmake/
 %{_libdir}/*.a
 %{_libdir}/*.so
+%{_libdir}/clang/
 %{_includedir}/llvm
 %{_includedir}/llvm-c
 
 
 %changelog
+* Wed Feb  1 2017 Hubert Figuiere <hub@figuiere.net> - 1.37.2-2
+- Move %{_libdir}/clang/ to the -devel package.
+
 * Wed Feb  1 2017 Hubert Figuiere <hub@figuiere.net> - 1.37.2-1
 - Initial release for Fedora.
