@@ -1,6 +1,6 @@
 Name: emscripten
 Version: 1.37.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: The emscripten compiler.
 
 License: NCSA
@@ -55,5 +55,8 @@ cp -va src -t %{buildroot}%{_datadir}/emscripten/
 %{_datadir}/emscripten/*
 
 %changelog
+* Thu Feb  2 2017 Hubert Figuiere <hub@figuiere.net> - 1.37.2-2
+- em.sh now export PATH to allow autodetection of LLVM_ROOT
+
 * Thu Feb  2 2017 Hubert Figuiere <hub@figuiere.net> - 1.37.2-1
 - Initial release for Fedora.
