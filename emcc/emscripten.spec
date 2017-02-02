@@ -1,6 +1,6 @@
 Name: emscripten
 Version: 1.37.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: The emscripten compiler.
 
 License: NCSA
@@ -11,10 +11,13 @@ Source0: %{name}-%{version}.tar.gz
 Source100: em.sh
 BuildArch: noarch
 
+Patch0: 0001-Check-for-LLVM-env-to-set-llvm_root-on-initial-start.patch
+
 Requires: emscripten-fastcomp = %{version}
 Requires: python >= 2.7
 Requires: nodejs
 Requires: gcc-c++
+Requires: java-1.8.0-openjdk
 Requires(posttrans): %{_sbindir}/alternatives
 
 %description
@@ -23,6 +26,7 @@ GCC compatible front-end driver.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0 -p1
 
 %install
 install -d %{buildroot}%{_datadir}/emscripten
@@ -33,6 +37,7 @@ install -m 0755 %{SOURCE100} %{buildroot}%{_datadir}/emscripten/bin/_em.sh
 cp -va tools -t %{buildroot}%{_datadir}/emscripten/
 cp -va system -t %{buildroot}%{_datadir}/emscripten/
 cp -va src -t %{buildroot}%{_datadir}/emscripten/
+cp -va third_party -t %{buildroot}%{_datadir}/emscripten/
 
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/emcc emcc %{_datadir}/emscripten/bin/_em.sh 10
@@ -55,8 +60,14 @@ cp -va src -t %{buildroot}%{_datadir}/emscripten/
 %{_datadir}/emscripten/*
 
 %changelog
+* Thu Feb  2 2017 Hubert Figuiere <hub@figuiere.net> - 1.37.2-3
+- Added third_party to the distribution.
+- Added java as a dependency for clojure.
+- Added patch0 to allow overriding LLVM_ROOT at setup time.
+- Set LLVM_ROOT properly in em.sh.
+
 * Thu Feb  2 2017 Hubert Figuiere <hub@figuiere.net> - 1.37.2-2
-- em.sh now export PATH to allow autodetection of LLVM_ROOT
+- em.sh now export PATH to allow autodetection of LLVM_ROOT.
 
 * Thu Feb  2 2017 Hubert Figuiere <hub@figuiere.net> - 1.37.2-1
 - Initial release for Fedora.
