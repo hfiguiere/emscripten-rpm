@@ -1,6 +1,6 @@
 Name: emscripten
 Version: 1.37.2
-Release: 3.1%{?dist}
+Release: 4%{?dist}
 Summary: The emscripten compiler.
 
 License: NCSA
@@ -47,6 +47,10 @@ cp -va third_party -t %{buildroot}%{_datadir}/emscripten/
 %{_sbindir}/update-alternatives --install %{_bindir}/emranlib  emranlib %{_datadir}/emscripten/bin/_em.sh 10
 %{_sbindir}/update-alternatives --install %{_bindir}/emrun  emrun %{_datadir}/emscripten/bin/_em.sh 10
 %{_sbindir}/update-alternatives --install %{_bindir}/emcmake emcmake %{_datadir}/emscripten/bin/_em.sh 10
+%{_sbindir}/update-alternatives --install %{_bindir}/emmake emmake %{_datadir}/emscripten/bin/_em.sh 10
+%{_sbindir}/update-alternatives --install %{_bindir}/emscons emscons %{_datadir}/emscripten/bin/_em.sh 10
+%{_sbindir}/update-alternatives --install %{_bindir}/emconfigure emconfigure %{_datadir}/emscripten/bin/_em.sh 10
+%{_sbindir}/update-alternatives --install %{_bindir}/em-config em-config %{_datadir}/emscripten/bin/_em.sh 10
 
 %postun
 [ $1 -eq 0 ] && %{_sbindir}/update-alternatives --remove emcc %{_datadir}/emscripten/bin/_em.sh
@@ -55,13 +59,20 @@ cp -va third_party -t %{buildroot}%{_datadir}/emscripten/
 [ $1 -eq 0 ] && %{_sbindir}/update-alternatives --remove emranlib %{_datadir}/emscripten/bin/_em.sh
 [ $1 -eq 0 ] && %{_sbindir}/update-alternatives --remove emrun %{_datadir}/emscripten/bin/_em.sh
 [ $1 -eq 0 ] && %{_sbindir}/update-alternatives --remove emcmake %{_datadir}/emscripten/bin/_em.sh
+[ $1 -eq 0 ] && %{_sbindir}/update-alternatives --remove emmake %{_datadir}/emscripten/bin/_em.sh
+[ $1 -eq 0 ] && %{_sbindir}/update-alternatives --remove emscons %{_datadir}/emscripten/bin/_em.sh
+[ $1 -eq 0 ] && %{_sbindir}/update-alternatives --remove emconfigure %{_datadir}/emscripten/bin/_em.sh
+[ $1 -eq 0 ] && %{_sbindir}/update-alternatives --remove em-config %{_datadir}/emscripten/bin/_em.sh
 
 %files
 %exclude %{_datadir}/emscripten/*.bat
 %{_datadir}/emscripten/*
 
 %changelog
-* Thu Feb  2 2017 Hubert Figuiere <hub@figuiere.net> - 1.37.2-3
+* Thu Feb  2 2017 Hubert Figuiere <hub@figuiere.net> - 1.37.2-4
+- Added emmake, emconfigure, emscons, em-config.
+
+* Thu Feb  2 2017 Hubert Figuiere <hub@figuiere.net> - 1.37.2-3.1
 - Added AutoReq: no because of some stray .py files.
 
 * Thu Feb  2 2017 Hubert Figuiere <hub@figuiere.net> - 1.37.2-3
