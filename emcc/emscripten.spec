@@ -1,12 +1,12 @@
 Name: emscripten
-Version: 1.37.2
+Version: 1.38.20
 Release: 4%{?dist}
 Summary: The emscripten compiler.
 
 License: NCSA
 URL: https://github.com/kripken/emscripten
 
-#https://github.com/kripken/emscripten/archive/1.37.2.tar.gz
+#https://github.com/kripken/emscripten/archive/1.38.20.tar.gz
 Source0: %{name}-%{version}.tar.gz
 Source100: em.sh
 BuildArch: noarch
