@@ -1,7 +1,7 @@
 # We need to install it all in its own prefix.
 %define _prefix /usr/lib/emscripten
 Name: emscripten-fastcomp
-Version: 1.37.2
+Version: 1.38.20
 Release: 2%{?dist}
 Summary: The clang+llvm backend for Emscripten
 
@@ -71,8 +71,15 @@ rm -vf %{buildroot}%{_datadir}/clang/clang-format-bbedit.applescript
 rm -vf %{buildroot}%{_datadir}/clang/clang-format-sublime.py*
 rm -vf %{buildroot}%{_datadir}/clang/clang-format.el
 rm -vf %{buildroot}%{_datadir}/clang/clang-format.py*
+# remove renamer
+rm -vf %{buildroot}%{_datadir}/clang/clang-rename.el
+rm -vf %{buildroot}%{_datadir}/clang/clang-rename.py*
 # remove diff reformatter
 rm -vf %{buildroot}%{_datadir}/clang/clang-format-diff.py*
+# remove bash autocompleter
+rm -vf %{buildroot}%{_datadir}/clang/bash-autocomplete.sh
+# remove opt-viewer
+rm -vrf %{buildroot}%{_datadir}/opt-viewer/
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
